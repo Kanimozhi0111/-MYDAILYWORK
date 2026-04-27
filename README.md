@@ -1,5 +1,5 @@
-<<<<<<< HEAD
-# -MYDAILYWORK
+
+# MYDAILYWORK
 =======
 # Rule-Based Chatbot (Python)
 
