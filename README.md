@@ -1,6 +1,5 @@
 
 # MYDAILYWORK
-=======
 # Rule-Based Chatbot (Python)
 
 A simple command-line chatbot built with Python using predefined rules and basic pattern matching.
