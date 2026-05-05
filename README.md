@@ -1,93 +1,50 @@
+# MYDAILYWORK – AI & Python Projects Collection
 
-# MYDAILYWORK
-# Rule-Based Chatbot (Python)
+This repository contains multiple Python-based projects demonstrating rule-based systems, game AI, and deep learning.
 
-A simple command-line chatbot built with Python using predefined rules and basic pattern matching.
+---
 
-This project demonstrates:
-- Rule-based conversation flow
-- Input handling with `if` conditions
-- Basic natural language pattern matching using regular expressions
-- Fallback responses for unknown queries
+## Projects
 
-## Features
+### 1. Rule-Based Chatbot
+A simple command-line chatbot using Python and regex.
 
-- Greets users (`hi`, `hello`, `hey`)
-- Responds to common questions:
-  - how are you
-  - your name / who are you
-  - help/support
-  - python learning questions
-  - motivation requests
-  - thanks
-- Exits the chat on:
-  - `bye`
-  - `goodbye`
-  - `exit`
-  - `quit`
-- Handles unknown input with a default reply
+- File: `rule_based_chatbot.py`
+- Features:
+  - Pattern-based responses
+  - Multiple intents (greetings, help, motivation, etc.)
+  - Exit commands supported
 
-## Project Structure
-
-```text
-.
-├── rule_based_chatbot.py
-└── README.md
-```
-
-## Requirements
-
-- Python 3.x
-
-No external libraries are required (uses only Python standard library).
-
-## How to Run
-
-1. Open terminal in the project folder.
-2. Run:
-
+Run:
 ```bash
 python rule_based_chatbot.py
-```
 
-## Example Interaction
+### 2. Tic-Tac-Toe AI
 
-```text
-Rule-Based Chatbot
-Type 'bye' to end the chat.
+Unbeatable AI using Minimax + Alpha-Beta Pruning.
 
-You: hello
-Bot: Hello! How can I help you today?
-You: what is your name
-Bot: I am a simple rule-based chatbot.
-You: thanks
-Bot: You're welcome!
-You: bye
-Bot: Goodbye! Have a nice day.
-```
+File: tic_tac_toe_ai.py
+Features:
+Player vs AI
+AI never loses
+Input validation
 
-## How It Works
+Run:
 
-The chatbot uses a `get_response()` function that:
-1. Normalizes user input (trim + lowercase)
-2. Checks input against predefined rules using regex patterns
-3. Returns the first matching response
-4. Returns a fallback response if no pattern matches
+python tic_tac_toe_ai.py
+3. Image Captioning AI
 
-## Customize the Bot
+Generates captions using CNN + LSTM/Transformer.
 
-To add new responses, edit `get_response()` in `rule_based_chatbot.py`:
-- Add a new `if re.search(...)` condition
-- Return the response you want for that pattern
+Features:
+ResNet50 / VGG16 encoder
+LSTM / Transformer decoder
+Custom dataset support
 
-## Future Improvements
+Train:
 
-- Move rules to a JSON file for easier updates
-- Add conversation memory/context
-- Add GUI or web interface
-- Add intent scoring for better matching
+python train.py
 
-## License
+Inference:
 
-You can use this project for learning and personal practice.
->>>>>>> a84cb88 (Initial commit: add chatbot project)
+python inference.py --image_path data/images/sample.jpg --checkpoint artifacts/model.pt --vocab_path artifacts/vocab.json --encoder resnet50 --decoder lstm
