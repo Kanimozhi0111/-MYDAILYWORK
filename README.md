@@ -18,6 +18,9 @@ A simple command-line chatbot using Python and regex.
 Run:
 ```bash
 python rule_based_chatbot.py
+```
+
+---
 
 ### 2. Tic-Tac-Toe AI
 
@@ -30,9 +33,13 @@ AI never loses
 Input validation
 
 Run:
-
+```bash
 python tic_tac_toe_ai.py
-3. Image Captioning AI
+```
+
+---
+
+### 3. Image Captioning AI
 
 Generates captions using CNN + LSTM/Transformer.
 
@@ -41,10 +48,15 @@ ResNet50 / VGG16 encoder
 LSTM / Transformer decoder
 Custom dataset support
 
+Requirements:
+```bash
+pip install -r requirements.txt
+```
 Train:
-
+```bash
 python train.py
-
+```
 Inference:
-
+```bash
 python inference.py --image_path data/images/sample.jpg --checkpoint artifacts/model.pt --vocab_path artifacts/vocab.json --encoder resnet50 --decoder lstm
+```
