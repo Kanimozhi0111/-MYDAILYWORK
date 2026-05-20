@@ -1,45 +1,35 @@
-# Image Captioning AI (CNN + NLP)
+# Image Captioning System (CNN Encoder + LSTM/Transformer Decoder)
 
-This project combines:
-- **Computer Vision**: pre-trained `ResNet50` or `VGG16` to extract image features
-- **Natural Language Processing**: a caption generator using either:
-  - `LSTM` decoder (RNN-based), or
-  - `Transformer` decoder
+This project trains an image caption generator using:
 
-## Features
+- A frozen pretrained CNN encoder (`resnet50` or `vgg16`)
+- A text decoder (`lstm` or `transformer`)
+- A custom vocabulary built from `captions.csv`
 
-- Encoder choices: `resnet50`, `vgg16`
-- Decoder choices: `lstm`, `transformer`
-- Train on caption datasets in a simple CSV format
-- Generate captions for new images after training
+## Project files
 
-## Project Structure
+- `config.py` - default configuration values
+- `dataset.py` - tokenization, vocabulary, dataset, collate function
+- `models.py` - encoder and decoder model definitions
+- `train.py` - model training and checkpoint saving
+- `inference.py` - caption generation for one image
+- `requirements.txt` - dependencies
 
-- `config.py` - hyperparameters and defaults
-- `dataset.py` - vocabulary, dataset, and dataloader
-- `models.py` - encoder and decoder architectures
-- `train.py` - training loop
-- `inference.py` - caption generation for a single image
-- `requirements.txt` - Python dependencies
+## Dataset format expected by code
 
-## Dataset Format
+`captions_file` must be a CSV with columns:
 
-Use a CSV file with two columns:
+- `image`: image filename (example: `cat1.jpg`)
+- `caption`: caption text
 
-- `image`: image filename (example: `dog_001.jpg`)
-- `caption`: text caption (example: `a brown dog is running`)
+Images are read from `images_dir`, and `image` values are joined to that path.
 
-Images should be in a single directory, for example:
+Default paths:
 
-```
-data/
-  images/
-    dog_001.jpg
-    cat_010.jpg
-  captions.csv
-```
+- images directory: `data/images`
+- captions file: `data/captions.csv`
 
-## Setup
+## Installation
 
 ```bash
 python -m venv .venv
@@ -47,32 +37,47 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-## Train
+## Train the model
 
-Example (ResNet + LSTM):
-
-```bash
-python train.py --images_dir data/images --captions_file data/captions.csv --encoder resnet50 --decoder lstm
-```
-
-Example (VGG + Transformer):
+Basic run (uses defaults from `config.py`):
 
 ```bash
-python train.py --images_dir data/images --captions_file data/captions.csv --encoder vgg16 --decoder transformer
+python train.py
 ```
 
-Saved artifacts:
-- `artifacts/model.pt`
-- `artifacts/vocab.json`
-
-## Inference
+Example with explicit options:
 
 ```bash
-python inference.py --image_path data/images/dog_001.jpg --checkpoint artifacts/model.pt --vocab_path artifacts/vocab.json --encoder resnet50 --decoder lstm
+python train.py --images_dir data/images --captions_file data/captions.csv --encoder resnet50 --decoder lstm --epochs 10 --batch_size 32
 ```
 
-## Notes
+Important train arguments:
 
-- Start with LSTM if you are new to captioning pipelines.
-- Transformer decoder often benefits from more training data.
-- For better results, use datasets like Flickr8k/Flickr30k/MS-COCO after adapting captions into the required CSV format.
+- `--encoder`: `resnet50` or `vgg16`
+- `--decoder`: `lstm` or `transformer`
+- `--max_len`: caption length limit (default 30)
+- `--min_word_freq`: minimum token frequency for vocabulary (default 2)
+
+Training output:
+
+- `artifacts/model.pt` (checkpoint with model weights + metadata)
+- `artifacts/vocab.json` (saved vocabulary)
+
+## Generate caption (inference)
+
+```bash
+python inference.py --image_path data/images/sample.jpg --checkpoint artifacts/model.pt --vocab_path artifacts/vocab.json --encoder resnet50 --decoder lstm --max_len 30
+```
+
+Notes:
+
+- Use the same encoder/decoder combination used during training.
+- Inference performs greedy decoding token by token until `<eos>` or max length.
+
+## Dependency list
+
+- `torch`
+- `torchvision`
+- `pillow`
+- `pandas`
+- `tqdm`
