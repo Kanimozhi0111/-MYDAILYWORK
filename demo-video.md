@@ -8,3 +8,6 @@
 
 ### Image Captioning
 [Watch Video](https://www.loom.com/share/1032845111d542c18053a9d27b25bf28)
+
+### Recommendation System
+[Watch Video](https://www.loom.com/share/a651f32413424350bacf2040468b7afc)
