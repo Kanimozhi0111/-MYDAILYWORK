@@ -11,3 +11,6 @@
 
 ### Recommendation System
 [Watch Video](https://www.loom.com/share/a651f32413424350bacf2040468b7afc)
+
+### Face Detection & Recognition
+[Watch Video](https://www.loom.com/share/fbb25d98b80c47a190da1225861c99c3)
